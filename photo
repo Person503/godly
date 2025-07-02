@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <meta property="og:title" content="Godly's Portfolio" />
+    <meta property="og:description" content="Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I’ve worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results." />
+    <meta property="og:image" content="https://i.imgur.com/AU895B5.png/>
+    <meta property="og:url" content="https://person503.github.io/godly/" />
+    <meta property="og:type" content="website" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #1a1a1a, #333);
+            color: white;
+        }
+        .container {
+            max-width: 1200px; /* Increased width for more space */
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .profile {
+            margin-top: 50px;
+        }
+        .profile img {
+            width: 50%; /* Adjusted size */
+            height: auto;
+            border: none;
+        }
+        .profile h1 {
+            margin: 20px 0 10px;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+        .profile p {
+            font-size: 1.1em;
+            color: #cccccc;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .profile a {
+            color: #F7A9A8;
+            text-decoration: none;
+        }
+        .profile a:hover {
+            color: #ff8c8c;
+            text-decoration: underline;
+        }
+        .scroll-icon {
+            font-size: 2em;
+            color: #888;
+            margin-bottom: 40px;
+            cursor: pointer;
+        }
+        .work-section {
+            background: #222;
+            padding: 50px 20px; /* Increased padding for bigger sections */
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .work-section h2 {
+            font-size: 2.5em; /* Increased font size */
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+        .work-section img {
+            width: 80%; /* Larger images */
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .work-section p {
+            font-size: 1.2em; /* Increased font size */
+            color: #aaaaaa;
+            line-height: 1.4;
+        }
+        .status-section {
+            margin-top: 40px;
+            padding: 30px; /* Increased padding for larger boxes */
+            border-top: 2px solid #F7A9A8;
+            border-bottom: 2px solid #F7A9A8;
+            background-color: #333;
+        }
+        .status-section .box {
+            background: #222;
+            padding: 20px; /* Increased padding for larger boxes */
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #F7A9A8;
+            font-family: monospace;
+        }
+        .status-section .box p {
+            margin: 0;
+            font-size: 1.2em; /* Increased font size */
+        }
+        .status-section .box span {
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .status-section .box a {
+            color: #F7A9A8;
+            text-decoration: underline;
+            font-family: Arial, sans-serif;
+        }
+        .status-section .box a:hover {
+            color: #ff8c8c;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <img src="https://i.imgur.com/AU895B5.png" alt="Signature">
+            <h1>Godly</h1>
+            <p>Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I’ve worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results.</a></p>
+            <div class="scroll-icon">↓</div>
+        </div>
+
+        <div class="work-section">
+            <h2>My work</h2>
+            <img src="https://i.imgur.com/Wf1DC4j.png" alt="Photos Work ">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/9gONah2.png" alt="Another Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/7zjEJ9L.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/ShAnRox.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/jN63cV8.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/OKf3KbS.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/CkfhH8s.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/WdWZaiN.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+        <div class="work-section">
+            <img src="https://i.imgur.com/MAhdLU7.png" alt="Additional Project">
+            <p> </p>
+        </div>
+   
+        <div class="work-section">
+            <img src="https://i.imgur.com/uA1MSSJ.png" alt="Additional Project">
+            <p> </p>
+        </div>
+          
+        <div class="work-section">
+            <img src="https://i.imgur.com/76HXNZ4.png" alt="Additional Project">
+            <p> </p>
+        </div>
+   
+        <div class="work-section">
+            <img src="https://i.imgur.com/fsTgarF.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+            <div class="work-section">
+            <img src="https://i.imgur.com/yl6VANO.png" alt="Additional Project">
+            <p> </p>
+        </div>
+        
+          <div class="work-section">
+            <img src="https://i.imgur.com/5s10yXP.png" alt="Additional Project">
+            <p> </p>
+        </div>
+
+          <div class="work-section">
+            <img src="https://i.imgur.com/eOH6K4Z.png" alt="Additional Project">
+            <p> </p>
+        </div>
+        
+        <div class="status-section">
+            <div class="box">
+                <p>Commission Status: <span>Open USD Only !</span></p>
+            </div>
+            <div class="box">
+                <p>Last Updated: <span>11/10/2024</span></p>
+            </div>
+            <div class="box">
+                <p>Discord Contact Information: <a href="https://discord.com/users/523529680066838567">Godly8147</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
