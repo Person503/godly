@@ -1,433 +1,816 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Godly - Photography</title>
     <meta property="og:title" content="Godly's Portfolio" />
-    <meta property="og:description" content="Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I've worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results." />
+    <meta
+      property="og:description"
+      content="Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I've worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results."
+    />
     <meta property="og:image" content="https://i.imgur.com/PXVr7ML.png" />
     <meta property="og:url" content="https://person503.github.io/godly/" />
     <meta property="og:type" content="website" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --primary: #318CFF;
-            --primary-hover: #2c7ae0;
-            --bg-dark: #0a0a0a;
-            --bg-card: #111111;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --text-muted: #888888;
-            --border: rgba(49, 140, 255, 0.2);
-        }
+      :root {
+        --primary: #318cff;
+        --primary-hover: #2c7ae0;
+        --bg-dark: #0a0a0a;
+        --bg-card: #111111;
+        --bg-secondary: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --text-muted: #888888;
+        --border: rgba(49, 140, 255, 0.2);
+      }
 
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+      html {
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+      }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+      body {
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: none;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
 
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+      }
 
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(49, 140, 255, 0.1) 0%,
+          transparent 70%
+        );
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 2;
+      }
+
+      .hero img {
+        width: 300px;
+        height: auto;
+        margin-bottom: 3rem;
+        filter: drop-shadow(0 20px 40px rgba(49, 140, 255, 0.3));
+        transition: transform 0.3s ease;
+      }
+
+      .hero img:hover {
+        transform: translateY(-10px);
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary) 0%,
+          var(--primary) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-description {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        line-height: 1.8;
+      }
+
+      .hero-description a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .hero-description a:hover {
+        color: var(--primary-hover);
+        text-decoration: underline;
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .scroll-indicator:hover {
+        color: var(--primary);
+      }
+
+      .scroll-arrow {
+        font-size: 1.5rem;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .work-section {
+        padding: 8rem 0;
+        background: var(--bg-secondary);
+      }
+
+      .section-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 4rem;
+        color: var(--text-primary);
+      }
+
+      .work-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        margin-bottom: 4rem;
+      }
+
+      .work-item {
+        background: var(--bg-card);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: all 0.4s ease;
+        position: relative;
+        will-change: transform;
+        transform: translateZ(0);
+      }
+
+      .work-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--primary-hover)
+        );
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+
+      .work-item:hover::before {
+        transform: scaleX(1);
+      }
+
+      .work-item:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary);
+        box-shadow: 0 30px 60px rgba(49, 140, 255, 0.2);
+      }
+
+      .work-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+
+      .work-item:hover img {
+        transform: scale(1.02);
+      }
+
+      .status-section {
+        padding: 6rem 0;
+        background: var(--bg-dark);
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .status-card {
+        background: var(--bg-card);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        will-change: transform;
+        transform: translateZ(0);
+      }
+
+      .status-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(49, 140, 255, 0.1),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .status-card:hover::before {
+        left: 100%;
+      }
+
+      .status-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-5px);
+      }
+
+      .status-label {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+      }
+
+      .status-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .status-value.highlight {
+        color: var(--primary);
+      }
+
+      .status-value a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .status-value a:hover {
+        color: var(--primary-hover);
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: radial-gradient(ellipse at center, rgba(49, 140, 255, 0.1) 0%, transparent 70%);
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-        }
-
-        .hero img {
-            width: 300px;
-            height: auto;
-            margin-bottom: 3rem;
-            filter: drop-shadow(0 20px 40px rgba(49, 140, 255, 0.3));
-            transition: transform 0.3s ease;
-        }
-
-        .hero img:hover {
-            transform: translateY(-10px);
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-description {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.8;
-        }
-
-        .hero-description a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .hero-description a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .scroll-indicator:hover {
-            color: var(--primary);
-        }
-
-        .scroll-arrow {
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        /* Work Section */
-        .work-section {
-            padding: 8rem 0;
-            background: var(--bg-secondary);
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: var(--text-primary);
-        }
-
-        .work-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .work-item {
-            background: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .work-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .work-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .work-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 30px 60px rgba(49, 140, 255, 0.2);
-        }
-
-        .work-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .work-item:hover img {
-            transform: scale(1.02);
-        }
-
-        /* Status Section */
-        .status-section {
-            padding: 6rem 0;
-            background: var(--bg-dark);
+          padding: 0 1rem;
         }
 
         .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .hero {
+          min-height: 100svh;
+          padding: 2rem 0;
+        }
+
+        .hero img {
+          width: 200px;
+          margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.5rem, 12vw, 4rem);
+          margin-bottom: 1rem;
+        }
+
+        .hero-description {
+          font-size: 1.1rem;
+          margin-bottom: 2rem;
+          padding: 0 0.5rem;
+        }
+
+        .work-section,
+        .status-section {
+          padding: 3rem 0;
+        }
+
+        .section-title {
+          font-size: clamp(2rem, 8vw, 3rem);
+          margin-bottom: 2rem;
+        }
+
+        .work-grid {
+          gap: 2rem;
+          flex-direction: column;
+        }
+
+        .work-item {
+          border-radius: 16px;
+          margin: 0 0.5rem;
+        }
+
+        .work-item:hover {
+          transform: translateY(-5px);
         }
 
         .status-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .status-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(49, 140, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .status-card:hover::before {
-            left: 100%;
-        }
-
-        .status-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
+          padding: 1.5rem;
+          border-radius: 12px;
         }
 
         .status-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+          font-size: 0.8rem;
         }
 
         .status-value {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
+          font-size: 1.1rem;
         }
 
-        .status-value.highlight {
-            color: var(--primary);
+        .scroll-indicator {
+          bottom: 1rem;
         }
 
-        .status-value a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .scroll-arrow {
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 0.75rem;
         }
 
-        .status-value a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
+        .hero img {
+          width: 180px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero img {
-                width: 250px;
-            }
-
-            .work-section,
-            .status-section {
-                padding: 4rem 0;
-            }
-
-            .work-grid {
-                flex-direction: column;
-            }
+        .hero-description {
+          font-size: 1rem;
+          line-height: 1.6;
         }
 
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
+        .work-item {
+          margin: 0 0.25rem;
+          border-radius: 12px;
         }
 
-        /* Loading animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+        .work-section,
+        .status-section {
+          padding: 2rem 0;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .status-grid {
+          gap: 1rem;
         }
+
+        .status-card {
+          padding: 1.25rem;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <section class="hero">
-        <div class="container">
-            <div class="hero-content fade-in">
-                <img src="https://i.imgur.com/PXVr7ML.png" alt="Godly's Signature">
-                <p class="hero-description">
-                    Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I've worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results.
-                </p>
-            </div>
+      <div class="container">
+        <div class="hero-content fade-in">
+          <img src="https://i.imgur.com/PXVr7ML.png" alt="Godly's Signature" />
+          <p class="hero-description">
+            Yo, I'm Godly. I've been a Roblox designer creating clothing and
+            also do photography. I'm from Texas, and my timezone is CDT. I've
+            worked with many servers, always aiming to bring unique projects to
+            life. I collaborate with various communities to deliver high-quality
+            results.
+          </p>
         </div>
-        <div class="scroll-indicator" onclick="document.querySelector('.work-section').scrollIntoView()">
-            <span>Scroll</span>
-            <div class="scroll-arrow">↓</div>
-        </div>
+      </div>
+      <div class="scroll-indicator" id="scrollIndicator">
+        <span>Scroll</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
     </section>
 
     <section class="work-section">
-        <div class="container">
-            <h2 class="section-title fade-in">My Work</h2>
-            <div class="work-grid">
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/EAV99fT.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/PnLK2N2.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/2vv68a0.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/HZMWYNV.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/TYJazDh.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/xMHxzBP.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/xtjkhQP.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/nrrrQgK.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/Tbf1KwY.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/Q2VMn1r.png" alt="Photography Work">
-                </div>
-                <div class="work-item fade-in">
-                    <img src="https://i.imgur.com/Hauc2Yb.png" alt="Photography Work">
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title fade-in">My Work</h2>
+        <div class="work-grid">
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/EAV99fT.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/PnLK2N2.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/2vv68a0.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/HZMWYNV.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/TYJazDh.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/xMHxzBP.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/xtjkhQP.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/nrrrQgK.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/Tbf1KwY.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/Q2VMn1r.png" alt="Photography Work" />
+          </div>
+          <div class="work-item fade-in">
+            <img src="https://i.imgur.com/Hauc2Yb.png" alt="Photography Work" />
+          </div>
         </div>
+      </div>
     </section>
 
     <section class="status-section">
-        <div class="container">
-            <h2 class="section-title fade-in">Status & Contact</h2>
-            <div class="status-grid">
-                <div class="status-card fade-in">
-                    <div class="status-label">Last Updated</div>
-                    <div class="status-value">7/1/2024</div>
-                </div>
-                <div class="status-card fade-in">
-                    <div class="status-label">Clothing Work</div>
-                    <div class="status-value">
-                        <a href="https://person503.github.io/godly/">View Clothing</a>
-                    </div>
-                </div>
-                <div class="status-card fade-in">
-                    <div class="status-label">Discord Contact</div>
-                    <div class="status-value">
-                        <a href="https://discord.com/users/523529680066838567">Godly8147</a>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Status & Contact</h2>
+        <div class="status-grid">
+          <div class="status-card fade-in">
+            <div class="status-label">Last Updated</div>
+            <div class="status-value">7/1/2024</div>
+          </div>
+          <div class="status-card fade-in">
+            <div class="status-label">Clothing Work</div>
+            <div class="status-value">
+              <a href="https://person503.github.io/godly/">View Clothing</a>
             </div>
+          </div>
+          <div class="status-card fade-in">
+            <div class="status-label">Discord Contact</div>
+            <div class="status-value">
+              <a href="https://discord.com/users/523529680066838567"
+                >Godly8147</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <script>
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      class InertiaScroll {
+        constructor() {
+          this.currentY = 0;
+          this.targetY = 0;
+          this.velocity = 0;
+          this.friction = 0.85;
+          this.isScrolling = false;
+          this.rafId = null;
+          this.lastWheelTime = 0;
+          this.wheelDelta = 0;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
-                    entry.target.classList.add('fade-in');
-                }
+          this.touchStartY = 0;
+          this.touchStartTime = 0;
+          this.touchVelocity = 0;
+          this.lastTouchY = 0;
+          this.lastTouchTime = 0;
+
+          this.init();
+        }
+
+        init() {
+          document.body.style.height =
+            document.documentElement.scrollHeight + "px";
+          document.body.style.overflow = "hidden";
+
+          this.currentY = window.pageYOffset;
+          this.targetY = this.currentY;
+
+          this.bindEvents();
+          this.update();
+        }
+
+        bindEvents() {
+          document.addEventListener("wheel", this.handleWheel.bind(this), {
+            passive: false,
+          });
+
+          document.addEventListener(
+            "touchstart",
+            this.handleTouchStart.bind(this),
+            { passive: true }
+          );
+          document.addEventListener(
+            "touchmove",
+            this.handleTouchMove.bind(this),
+            { passive: false }
+          );
+          document.addEventListener(
+            "touchend",
+            this.handleTouchEnd.bind(this),
+            { passive: true }
+          );
+
+          document.addEventListener("keydown", this.handleKeydown.bind(this));
+
+          window.addEventListener("resize", this.handleResize.bind(this));
+
+          document
+            .getElementById("scrollIndicator")
+            .addEventListener("click", () => {
+              this.scrollToSection(".work-section");
             });
-        }, observerOptions);
+        }
 
-        // Observe all elements that should fade in
-        document.querySelectorAll('.work-item, .status-card, .section-title').forEach(el => {
+        handleWheel(e) {
+          e.preventDefault();
+
+          const now = Date.now();
+          const deltaY = e.deltaY;
+
+          const newDirection = Math.sign(deltaY);
+          const currentDirection = Math.sign(this.velocity);
+
+          if (
+            newDirection !== 0 &&
+            currentDirection !== 0 &&
+            newDirection !== currentDirection
+          ) {
+            this.velocity = 0;
+            this.wheelDelta = 0;
+          }
+
+          this.wheelDelta += deltaY * 0.8;
+
+          this.velocity += this.wheelDelta * 0.05;
+          this.wheelDelta *= 0.87;
+
+          this.velocity = Math.max(-65, Math.min(65, this.velocity));
+
+          this.lastWheelTime = now;
+          this.startScrolling();
+        }
+
+        handleTouchStart(e) {
+          this.touchStartY = e.touches[0].clientY;
+          this.touchStartTime = Date.now();
+          this.lastTouchY = this.touchStartY;
+          this.lastTouchTime = this.touchStartTime;
+          this.touchVelocity = 0;
+
+          this.velocity = 0;
+        }
+
+        handleTouchMove(e) {
+          e.preventDefault();
+
+          const currentY = e.touches[0].clientY;
+          const currentTime = Date.now();
+          const deltaY = this.lastTouchY - currentY;
+          const deltaTime = currentTime - this.lastTouchTime;
+
+          const newDirection = Math.sign(deltaY);
+          const currentDirection = Math.sign(this.velocity);
+
+          if (
+            newDirection !== 0 &&
+            currentDirection !== 0 &&
+            newDirection !== currentDirection
+          ) {
+            this.velocity = 0;
+          }
+
+          if (deltaTime > 0) {
+            this.touchVelocity = deltaY / deltaTime;
+          }
+
+          this.targetY += deltaY * 1.1;
+          this.lastTouchY = currentY;
+          this.lastTouchTime = currentTime;
+
+          this.clampTargetY();
+          this.startScrolling();
+        }
+
+        handleTouchEnd(e) {
+          this.velocity = this.touchVelocity * 17;
+          this.velocity = Math.max(-40, Math.min(40, this.velocity));
+
+          if (Math.abs(this.velocity) > 1) {
+            this.startScrolling();
+          }
+        }
+
+        handleKeydown(e) {
+          const scrollAmount = 125;
+
+          switch (e.key) {
+            case "ArrowDown":
+            case "PageDown":
+              e.preventDefault();
+              if (this.velocity < 0) this.velocity = 0;
+              this.velocity += scrollAmount * 0.12;
+              this.startScrolling();
+              break;
+            case "ArrowUp":
+            case "PageUp":
+              e.preventDefault();
+              if (this.velocity > 0) this.velocity = 0;
+              this.velocity -= scrollAmount * 0.12;
+              this.startScrolling();
+              break;
+            case "Home":
+              e.preventDefault();
+              this.scrollTo(0);
+              break;
+            case "End":
+              e.preventDefault();
+              this.scrollTo(document.body.scrollHeight - window.innerHeight);
+              break;
+          }
+        }
+
+        handleResize() {
+          document.body.style.height =
+            document.documentElement.scrollHeight + "px";
+          this.clampTargetY();
+        }
+
+        startScrolling() {
+          if (!this.isScrolling) {
+            this.isScrolling = true;
+            this.update();
+          }
+        }
+
+        update() {
+          this.targetY += this.velocity;
+
+          this.velocity *= 0.86;
+
+          this.clampTargetY();
+
+          const diff = this.targetY - this.currentY;
+          this.currentY += diff * 0.12;
+
+          window.scrollTo(0, this.currentY);
+
+          if (Math.abs(diff) > 0.4 || Math.abs(this.velocity) > 0.1) {
+            this.rafId = requestAnimationFrame(this.update.bind(this));
+          } else {
+            this.isScrolling = false;
+            this.velocity = 0;
+            window.scrollTo(0, this.targetY);
+            this.currentY = this.targetY;
+          }
+        }
+
+        clampTargetY() {
+          const maxScroll = document.body.scrollHeight - window.innerHeight;
+          this.targetY = Math.max(0, Math.min(maxScroll, this.targetY));
+        }
+
+        scrollTo(position, duration = 1000) {
+          const startPosition = this.currentY;
+          const distance = position - startPosition;
+          let startTime = null;
+
+          const animate = (currentTime) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+            this.currentY = startPosition + distance * easedProgress;
+            this.targetY = this.currentY;
+            this.velocity = 0;
+
+            window.scrollTo(0, this.currentY);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+
+        scrollToSection(selector) {
+          const element = document.querySelector(selector);
+          if (element) {
+            const targetPosition = element.offsetTop;
+            this.scrollTo(targetPosition);
+          }
+        }
+      }
+
+      let inertiaScroll;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          inertiaScroll = new InertiaScroll();
+        }, 100);
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(".work-item, .status-card, .section-title")
+          .forEach((el) => {
             observer.observe(el);
-        });
+          });
+      });
 
-        // Smooth scroll for scroll indicator
-        document.querySelector('.scroll-indicator').addEventListener('click', () => {
-            document.querySelector('.work-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
+      if (!("scrollBehavior" in document.documentElement.style)) {
+        document.documentElement.style.scrollBehavior = "auto";
+      }
     </script>
-</body>
+  </body>
 </html>
