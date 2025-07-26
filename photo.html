@@ -3,190 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Godly - Photography</title>
     <meta property="og:title" content="Godly's Portfolio" />
-    <meta property="og:description" content="Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I’ve worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results." />
-    <meta property="og:image" content="https://i.imgur.com/PXVr7ML.png>
+    <meta property="og:description" content="Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I've worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results." />
+    <meta property="og:image" content="https://i.imgur.com/PXVr7ML.png" />
     <meta property="og:url" content="https://person503.github.io/godly/" />
     <meta property="og:type" content="website" />
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #318CFF;
+            --primary-hover: #2c7ae0;
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --border: rgba(49, 140, 255, 0.2);
+        }
+
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(180deg, #1a1a1a, #333);
-            color: white;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
         .container {
-            max-width: 1200px; /* Increased width for more space */
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(49, 140, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
             text-align: center;
+            z-index: 2;
         }
-        .profile {
-            margin-top: 50px;
-        }
-        .profile img {
-            width: 50%; /* Adjusted size */
+
+        .hero img {
+            width: 300px;
             height: auto;
-            border: none;
+            margin-bottom: 3rem;
+            filter: drop-shadow(0 20px 40px rgba(49, 140, 255, 0.3));
+            transition: transform 0.3s ease;
         }
-        .profile h1 {
-            margin: 20px 0 10px;
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #e0e0e0;
+
+        .hero img:hover {
+            transform: translateY(-10px);
         }
-        .profile p {
-            font-size: 1.1em;
-            color: #cccccc;
-            line-height: 1.5;
-            margin-bottom: 30px;
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .profile a {
-            color: #318CFF;
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-description a {
+            color: var(--primary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
-        .profile a:hover {
-            color: #ff8c8c;
+
+        .hero-description a:hover {
+            color: var(--primary-hover);
             text-decoration: underline;
         }
-        .scroll-icon {
-            font-size: 2em;
-            color: #888;
-            margin-bottom: 40px;
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
             cursor: pointer;
+            transition: color 0.3s ease;
         }
+
+        .scroll-indicator:hover {
+            color: var(--primary);
+        }
+
+        .scroll-arrow {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Work Section */
         .work-section {
-            background: #222;
-            padding: 50px 20px; /* Increased padding for bigger sections */
-            margin: 20px 0;
-            border-radius: 10px;
+            padding: 8rem 0;
+            background: var(--bg-secondary);
         }
-        .work-section h2 {
-            font-size: 2.5em; /* Increased font size */
-            margin-bottom: 20px;
-            color: #cccccc;
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
         }
-        .work-section img {
-            width: 80%; /* Larger images */
+
+        .work-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .work-item {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .work-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .work-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(49, 140, 255, 0.2);
+        }
+
+        .work-item img {
+            width: 100%;
             height: auto;
-            margin-bottom: 20px;
-            border-radius: 5px;
+            display: block;
+            transition: transform 0.4s ease;
         }
-        .work-section p {
-            font-size: 1.2em; /* Increased font size */
-            color: #aaaaaa;
-            line-height: 1.4;
+
+        .work-item:hover img {
+            transform: scale(1.02);
         }
+
+        /* Status Section */
         .status-section {
-            margin-top: 40px;
-            padding: 30px; /* Increased padding for larger boxes */
-            border-top: 2px solid #318CFF;
-            border-bottom: 2px solid #318CFF;
-            background-color: #333;
+            padding: 6rem 0;
+            background: var(--bg-dark);
         }
-        .status-section .box {
-            background: #222;
-            padding: 20px; /* Increased padding for larger boxes */
-            margin: 10px 0;
-            border-radius: 5px;
-            color: #318CFF;
-            font-family: monospace;
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
-        .status-section .box p {
-            margin: 0;
-            font-size: 1.2em; /* Increased font size */
+
+        .status-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .status-section .box span {
-            color: white;
-            font-family: Arial, sans-serif;
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(49, 140, 255, 0.1), transparent);
+            transition: left 0.6s ease;
         }
-        .status-section .box a {
-            color: #318CFF;
+
+        .status-card:hover::before {
+            left: 100%;
+        }
+
+        .status-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .status-value.highlight {
+            color: var(--primary);
+        }
+
+        .status-value a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .status-value a:hover {
+            color: var(--primary-hover);
             text-decoration: underline;
-            font-family: Arial, sans-serif;
         }
-        .status-section .box a:hover {
-            color: #ff8c8c;
-            text-decoration: underline;
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero img {
+                width: 250px;
+            }
+
+            .work-section,
+            .status-section {
+                padding: 4rem 0;
+            }
+
+            .work-grid {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="profile">
-            <img src="https://i.imgur.com/PXVr7ML.png" alt="Signature">
-            <p>Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I’ve worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results.</a></p>
-            <div class="scroll-icon">↓</div>
-         </div>
-
-    <div class="work-section">
-        <h2>My work</h2>
-        <img src="https://i.imgur.com/EAV99fT.png" alt="Work 1">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/PnLK2N2.png" alt="Work 2">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/2vv68a0.png" alt="Work 3">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/HZMWYNV.png" alt="Work 4">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/TYJazDh.png" alt="Work 5">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/xMHxzBP.png" alt="Work 6">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/xtjkhQP.png" alt="Work 7">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/nrrrQgK.png" alt="Work 8">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/Tbf1KwY.png" alt="Work 9">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/Q2VMn1r.png" alt="Work 10">
-        <p></p>
-    </div>
-
-    <div class="work-section">
-        <img src="https://i.imgur.com/Hauc2Yb.png" alt="Work 11">
-        <p></p>
-    </div>
-
-    <div class="status-section">
-        <div class="box">
-            <p>Last Updated: <span>7/1/2024</span></p>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <img src="https://i.imgur.com/PXVr7ML.png" alt="Godly's Signature">
+                <p class="hero-description">
+                    Yo, I'm Godly. I've been a Roblox designer creating clothing and also do photography. I'm from Texas, and my timezone is CDT. I've worked with many servers, always aiming to bring unique projects to life. I collaborate with various communities to deliver high-quality results.
+                </p>
+            </div>
         </div>
-           <div class="box">
-            <p>Interested in clothing?  <a href="https://person503.github.io/godly/">Click Here!</a></p>
+        <div class="scroll-indicator" onclick="document.querySelector('.work-section').scrollIntoView()">
+            <span>Scroll</span>
+            <div class="scroll-arrow">↓</div>
         </div>
-        <div class="box">
-            <p>Discord Contact Information: <a href="https://discord.com/users/523529680066838567">Godly8147</a></p>
+    </section>
+
+    <section class="work-section">
+        <div class="container">
+            <h2 class="section-title fade-in">My Work</h2>
+            <div class="work-grid">
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/EAV99fT.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/PnLK2N2.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/2vv68a0.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/HZMWYNV.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/TYJazDh.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/xMHxzBP.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/xtjkhQP.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/nrrrQgK.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/Tbf1KwY.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/Q2VMn1r.png" alt="Photography Work">
+                </div>
+                <div class="work-item fade-in">
+                    <img src="https://i.imgur.com/Hauc2Yb.png" alt="Photography Work">
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+
+    <section class="status-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Status & Contact</h2>
+            <div class="status-grid">
+                <div class="status-card fade-in">
+                    <div class="status-label">Last Updated</div>
+                    <div class="status-value">7/1/2024</div>
+                </div>
+                <div class="status-card fade-in">
+                    <div class="status-label">Clothing Work</div>
+                    <div class="status-value">
+                        <a href="https://person503.github.io/godly/">View Clothing</a>
+                    </div>
+                </div>
+                <div class="status-card fade-in">
+                    <div class="status-label">Discord Contact</div>
+                    <div class="status-value">
+                        <a href="https://discord.com/users/523529680066838567">Godly8147</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements that should fade in
+        document.querySelectorAll('.work-item, .status-card, .section-title').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for scroll indicator
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.work-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
