@@ -33,7 +33,6 @@
 
       html {
         scroll-behavior: auto;
-        -webkit-overflow-scrolling: touch;
         overflow-x: hidden;
       }
 
@@ -44,12 +43,9 @@
         color: var(--text-primary);
         line-height: 1.6;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
         overscroll-behavior: none;
         transform: translateZ(0);
-        -webkit-transform: translateZ(0);
         backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
       }
 
       ::-webkit-scrollbar {
@@ -466,41 +462,7 @@
     <section class="work-section">
       <div class="container">
         <h2 class="section-title fade-in">My Work</h2>
-        <div class="work-grid">
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/EAV99fT.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/PnLK2N2.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/2vv68a0.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/HZMWYNV.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/TYJazDh.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/xMHxzBP.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/xtjkhQP.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/nrrrQgK.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/Tbf1KwY.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/Q2VMn1r.png" alt="Photography Work" />
-          </div>
-          <div class="work-item fade-in">
-            <img src="https://i.imgur.com/Hauc2Yb.png" alt="Photography Work" />
-          </div>
-        </div>
+        <div class="work-grid" id="workGrid"></div>
       </div>
     </section>
 
@@ -531,31 +493,19 @@
     </section>
 
     <script>
+
       class InertiaScroll {
         constructor() {
           this.currentY = 0;
           this.targetY = 0;
           this.velocity = 0;
-          this.friction = 0.85;
           this.isScrolling = false;
-          this.rafId = null;
-          this.lastWheelTime = 0;
-          this.wheelDelta = 0;
-
-          this.touchStartY = 0;
-          this.touchStartTime = 0;
-          this.touchVelocity = 0;
-          this.lastTouchY = 0;
-          this.lastTouchTime = 0;
 
           this.init();
         }
 
         init() {
-          document.body.style.height =
-            document.documentElement.scrollHeight + "px";
           document.body.style.overflow = "hidden";
-
           this.currentY = window.pageYOffset;
           this.targetY = this.currentY;
 
@@ -564,131 +514,53 @@
         }
 
         bindEvents() {
-          document.addEventListener("wheel", this.handleWheel.bind(this), {
+          document.addEventListener("wheel", (e) => this.handleWheel(e), {
             passive: false,
           });
-
-          document.addEventListener(
-            "touchstart",
-            this.handleTouchStart.bind(this),
-            { passive: true }
-          );
-          document.addEventListener(
-            "touchmove",
-            this.handleTouchMove.bind(this),
-            { passive: false }
-          );
-          document.addEventListener(
-            "touchend",
-            this.handleTouchEnd.bind(this),
-            { passive: true }
-          );
-
-          document.addEventListener("keydown", this.handleKeydown.bind(this));
-
-          window.addEventListener("resize", this.handleResize.bind(this));
-
-          document
-            .getElementById("scrollIndicator")
-            .addEventListener("click", () => {
-              this.scrollToSection(".work-section");
-            });
+          document.addEventListener("touchstart", (e) => this.handleTouchStart(e), { passive: true });
+          document.addEventListener("touchmove", (e) => this.handleTouchMove(e), { passive: false });
+          document.addEventListener("touchend", (e) => this.handleTouchEnd(e), { passive: true });
+          document.addEventListener("keydown", (e) => this.handleKeydown(e));
+          window.addEventListener("resize", () => this.handleResize());
+          document.getElementById("scrollIndicator").addEventListener("click", () => {
+            this.scrollToSection(".work-section");
+          });
         }
 
         handleWheel(e) {
           e.preventDefault();
-
-          const now = Date.now();
-          const deltaY = e.deltaY;
-
-          const newDirection = Math.sign(deltaY);
-          const currentDirection = Math.sign(this.velocity);
-
-          if (
-            newDirection !== 0 &&
-            currentDirection !== 0 &&
-            newDirection !== currentDirection
-          ) {
-            this.velocity = 0;
-            this.wheelDelta = 0;
-          }
-
-          this.wheelDelta += deltaY * 0.8;
-
-          this.velocity += this.wheelDelta * 0.05;
-          this.wheelDelta *= 0.87;
-
+          this.velocity += e.deltaY * 0.5;
           this.velocity = Math.max(-65, Math.min(65, this.velocity));
-
-          this.lastWheelTime = now;
           this.startScrolling();
         }
 
         handleTouchStart(e) {
-          this.touchStartY = e.touches[0].clientY;
-          this.touchStartTime = Date.now();
-          this.lastTouchY = this.touchStartY;
-          this.lastTouchTime = this.touchStartTime;
-          this.touchVelocity = 0;
-
+          this.lastTouchY = e.touches[0].clientY;
           this.velocity = 0;
         }
 
         handleTouchMove(e) {
           e.preventDefault();
-
-          const currentY = e.touches[0].clientY;
-          const currentTime = Date.now();
-          const deltaY = this.lastTouchY - currentY;
-          const deltaTime = currentTime - this.lastTouchTime;
-
-          const newDirection = Math.sign(deltaY);
-          const currentDirection = Math.sign(this.velocity);
-
-          if (
-            newDirection !== 0 &&
-            currentDirection !== 0 &&
-            newDirection !== currentDirection
-          ) {
-            this.velocity = 0;
-          }
-
-          if (deltaTime > 0) {
-            this.touchVelocity = deltaY / deltaTime;
-          }
-
-          this.targetY += deltaY * 1.1;
-          this.lastTouchY = currentY;
-          this.lastTouchTime = currentTime;
-
-          this.clampTargetY();
+          const deltaY = this.lastTouchY - e.touches[0].clientY;
+          this.velocity += deltaY * 1.1;
+          this.lastTouchY = e.touches[0].clientY;
           this.startScrolling();
         }
 
-        handleTouchEnd(e) {
-          this.velocity = this.touchVelocity * 17;
-          this.velocity = Math.max(-40, Math.min(40, this.velocity));
-
-          if (Math.abs(this.velocity) > 1) {
-            this.startScrolling();
-          }
-        }
+        handleTouchEnd(e) {}
 
         handleKeydown(e) {
           const scrollAmount = 125;
-
           switch (e.key) {
             case "ArrowDown":
             case "PageDown":
               e.preventDefault();
-              if (this.velocity < 0) this.velocity = 0;
               this.velocity += scrollAmount * 0.12;
               this.startScrolling();
               break;
             case "ArrowUp":
             case "PageUp":
               e.preventDefault();
-              if (this.velocity > 0) this.velocity = 0;
               this.velocity -= scrollAmount * 0.12;
               this.startScrolling();
               break;
@@ -704,9 +576,7 @@
         }
 
         handleResize() {
-          document.body.style.height =
-            document.documentElement.scrollHeight + "px";
-          this.clampTargetY();
+          document.body.style.height = document.documentElement.scrollHeight + "px";
         }
 
         startScrolling() {
@@ -718,10 +588,10 @@
 
         update() {
           this.targetY += this.velocity;
-
           this.velocity *= 0.86;
 
-          this.clampTargetY();
+          const maxScroll = document.body.scrollHeight - window.innerHeight;
+          this.targetY = Math.max(0, Math.min(maxScroll, this.targetY));
 
           const diff = this.targetY - this.currentY;
           this.currentY += diff * 0.12;
@@ -729,18 +599,12 @@
           window.scrollTo(0, this.currentY);
 
           if (Math.abs(diff) > 0.4 || Math.abs(this.velocity) > 0.1) {
-            this.rafId = requestAnimationFrame(this.update.bind(this));
+            requestAnimationFrame(() => this.update());
           } else {
             this.isScrolling = false;
             this.velocity = 0;
-            window.scrollTo(0, this.targetY);
             this.currentY = this.targetY;
           }
-        }
-
-        clampTargetY() {
-          const maxScroll = document.body.scrollHeight - window.innerHeight;
-          this.targetY = Math.max(0, Math.min(maxScroll, this.targetY));
         }
 
         scrollTo(position, duration = 1000) {
@@ -749,68 +613,75 @@
           let startTime = null;
 
           const animate = (currentTime) => {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
+            if (!startTime) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
 
-            const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-            this.currentY = startPosition + distance * easedProgress;
+            this.currentY = startPosition + distance * eased;
             this.targetY = this.currentY;
             this.velocity = 0;
-
             window.scrollTo(0, this.currentY);
 
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
+            if (progress < 1) requestAnimationFrame(animate);
           };
 
           requestAnimationFrame(animate);
         }
 
         scrollToSection(selector) {
-          const element = document.querySelector(selector);
-          if (element) {
-            const targetPosition = element.offsetTop;
-            this.scrollTo(targetPosition);
-          }
+          const el = document.querySelector(selector);
+          if (el) this.scrollTo(el.offsetTop);
         }
       }
 
       let inertiaScroll;
-
       document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          inertiaScroll = new InertiaScroll();
-        }, 100);
-      });
+        inertiaScroll = new InertiaScroll();
 
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
-            entry.target.classList.add("fade-in");
+        const workGrid = document.getElementById("workGrid");
+        const workImages = [
+          "https://i.imgur.com/EAV99fT.png",
+          "https://i.imgur.com/PnLK2N2.png",
+          "https://i.imgur.com/2vv68a0.png",
+          "https://i.imgur.com/HZMWYNV.png",
+          "https://i.imgur.com/TYJazDh.png",
+          "https://i.imgur.com/xMHxzBP.png",
+          "https://i.imgur.com/xtjkhQP.png",
+          "https://i.imgur.com/nrrrQgK.png",
+          "https://i.imgur.com/Tbf1KwY.png",
+          "https://i.imgur.com/Q2VMn1r.png",
+          "https://i.imgur.com/Hauc2Yb.png"
+        ];
+
+        let currentIndex = 0;
+        function addWorkItems(count = 3) {
+          for (let i = 0; i < count && currentIndex < workImages.length; i++) {
+            const imgSrc = workImages[currentIndex];
+            const div = document.createElement("div");
+            div.className = "work-item fade-in";
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = "Photography Work";
+            div.appendChild(img);
+            workGrid.appendChild(div);
+            currentIndex++;
+          }
+        }
+
+    
+        addWorkItems(6);
+
+ 
+        window.addEventListener("scroll", () => {
+          if (currentIndex >= workImages.length) return;
+          const scrollBottom = inertiaScroll.currentY + window.innerHeight;
+          if (scrollBottom + 300 >= document.body.scrollHeight) {
+            addWorkItems(3);
           }
         });
-      }, observerOptions);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .querySelectorAll(".work-item, .status-card, .section-title")
-          .forEach((el) => {
-            observer.observe(el);
-          });
       });
-
-      if (!("scrollBehavior" in document.documentElement.style)) {
-        document.documentElement.style.scrollBehavior = "auto";
-      }
     </script>
   </body>
 </html>
